@@ -28,7 +28,6 @@ const Header = ({ cartItems, user, setUser }) => {
           </nav>
 
           <div className="flex items-center space-x-4">
-            <span className="hidden md:block text-sm">+963 997 643 565</span>
 
             {/* Lien vers la wishlist */}
             <Link to="/wishlist" className="hover:text-yellow-400">
