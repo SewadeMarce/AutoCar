@@ -4,8 +4,9 @@ import Order from "../models/Order.js";
 config()
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-const YOUR_DOMAIN = 'http://localhost:5173';
-
+const YOUR_DOMAIN = process.env.NODE_ENV === "production"
+  ? process.env.YOUR_DOMAIN
+  : 'http://localhost:5173';
 export const createCheckoutSession = async (req, res) => {
 
   const { items } = req.body;
@@ -70,7 +71,7 @@ export const getCheckoutStatus = async (req, res) => {
         paymentInfo: {
           id: session.payment_intent,
           status: session.status,
-        }, 
+        },
         status: "paid",
       });
 

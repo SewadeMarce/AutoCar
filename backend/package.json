@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch index.js",
     "seed": "node seed.js",
-    "seedUser": "node seedUser.js"
+    "seedUser": "node seedUser.js",
+        "start": "node index.js"
+
   },
   "type": "module",
   "keywords": [],
