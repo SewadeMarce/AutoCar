@@ -10,16 +10,21 @@ import apiClient from "../../utils/axios";
 const stripePromise = loadStripe("pk_test_51RTpeWC1YhgPVCJxmWlwhAYTITZXrXOgxqJqhfDeponlKqAbDdB6i554F1w5HAMDToS5fV1e22ySUmOu6RrL2lTy0002MfdWum");
 
 const CheckoutForm = ({ cartItems }) => {
-
+  const [loading, setLoading] = useState(true);
   const items = cartItems.length == 0 ? [{ _id: 'car-1', name: 'Mercedes Class S', price: 50000, quantity: 1, }] : cartItems;
   const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
+    setLoading(true)
     try {
       const res = await apiClient.post('/checkout/create-session', { items });
-      return res.data.clientSecret
+      const { clientSecret } = res.data;
+      setLoading(false)
+      return clientSecret;
     } catch (err) {
-
+      setLoading(false)
       console.error('Impossible de créer la session de paiement. Veuillez réessayer.', err);
+    } finally {
+      setLoading(false)
     }
 
   }, []);
@@ -36,7 +41,12 @@ const CheckoutForm = ({ cartItems }) => {
   //     </EmbeddedCheckoutProvider>
   //   </div>
   // )
-
+  if (loading) return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-950 text-white font-inter">
+      <div className="text-center p-8">
+        <h2 className="text-2xl animate-pulse">Chargement...</h2>
+      </div>
+    </div>)
   return (
     <div className="">
 
