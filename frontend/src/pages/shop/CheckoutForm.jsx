@@ -41,12 +41,7 @@ const CheckoutForm = ({ cartItems }) => {
   //     </EmbeddedCheckoutProvider>
   //   </div>
   // )
-  if (loading) return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-950 text-white font-inter">
-      <div className="text-center p-8">
-        <h2 className="text-2xl animate-pulse">Chargement...</h2>
-      </div>
-    </div>)
+ 
   return (
     <div className="">
 
